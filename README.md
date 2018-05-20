@@ -66,3 +66,24 @@ var options = {
 
 $(document).pos(options);
 ```
+
+
+Disable Scan;
+```javascript
+$(document).pos.disableScan();
+```
+
+Enable Scan;
+```javascript
+$(document).pos.enableScan();
+```
+
+Disable Swipe;
+```javascript
+$(document).pos.disableSwipe();
+```
+
+Enable Swipe;
+```javascript
+$(document).pos.enableSwipe();
+```

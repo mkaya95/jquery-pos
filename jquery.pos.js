@@ -3,16 +3,16 @@
     $.fn.pos = function(options) {
         //define instance for use in child functions
         var $this = $(this);
-	var data = {
-		scan: '',
-		swipe: ''
-	};
+      	var data = {
+      		scan: '',
+      		swipe: ''
+      	};
         //set default options
         defaults = {
             scan: true,
-	    submit_on_scan: false,
+	          submit_on_scan: false,
             swipe: true,
-	    submit_on_swipe: false,
+	          submit_on_swipe: false,
             events: {
                 scan: {
                     barcode: 'scan.pos.barcode'
@@ -41,12 +41,26 @@
         //extend options
         $this.options = $.extend(true, {}, defaults, options);
 
+        $.fn.pos.disableScan = function() {
+            $this.options.scan = false;
+        }
+        $.fn.pos.enableScan = function() {
+            $this.options.scan = true;
+        }
+
+        $.fn.pos.disableSwipe = function() {
+            $this.options.swipe = false;
+        }
+        $.fn.pos.enableSwipe = function() {
+            $this.options.swipe = true;
+        }
+
         $this.keypress(function(event) {
             if ($this.options.scan) {
                 if (event.which == 13) {
                     if( !$this.options.submit_on_scan ){
-			event.preventDefault();
-		    }
+              			     event.preventDefault();
+              		  }
                     var scanexp = new RegExp('^' + $this.options.prefix.scan.barcode + $this.options.regexp.scan.barcode + '$');
                     if (data.scan.match(scanexp)) {
                         $this.trigger({
@@ -64,9 +78,9 @@
 
             if ($this.options.swipe) {
                 if (event.which == 13) {
-		    if( !$this.options.submit_on_swipe ){
-                    	event.preventDefault();
-		    }
+            		    if( !$this.options.submit_on_swipe ){
+                        event.preventDefault();
+            		    }
                     var swipexp = new RegExp('^' + $this.options.prefix.swipe.card + $this.options.regexp.swipe.card + '$');
                     if (data.swipe.match(swipexp)) {
                         var swipe_match = swipexp.exec(data.swipe);
